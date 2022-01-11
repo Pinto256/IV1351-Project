@@ -1,2 +1,0 @@
-insert into pricing_scheme (individual_lesson_beginner, individual_lesson_intermediate, individual_lesson_advanced, group_lesson_beginner, group_lesson_intermediate, group_lesson_advanced, ensemble)
-values (100,100,175,75,75,150,125)
