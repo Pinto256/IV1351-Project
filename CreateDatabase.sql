@@ -87,7 +87,7 @@ ALTER TABLE student_parent ADD CONSTRAINT PK_student_parent PRIMARY KEY (student
 
 CREATE TABLE time_slot (
  id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
- time TIME(10) NOT NULL
+ time TIME(6) NOT NULL
 );
 
 ALTER TABLE time_slot ADD CONSTRAINT PK_time_slot PRIMARY KEY (id);
@@ -109,7 +109,7 @@ CREATE TABLE ensemble (
  genre VARCHAR(256),
  instructor_id INT NOT NULL,
  date DATE NOT NULL,
- time TIME(10) NOT NULL
+ time TIME(6) NOT NULL
 );
 
 ALTER TABLE ensemble ADD CONSTRAINT PK_ensemble PRIMARY KEY (id);
@@ -122,7 +122,7 @@ CREATE TABLE group_lesson (
  minimum_number_of_students INT NOT NULL,
  instructor_id INT NOT NULL,
  date DATE NOT NULL,
- time TIMESTAMP(6) NOT NULL
+ time TIME(6) NOT NULL
 );
 
 ALTER TABLE group_lesson ADD CONSTRAINT PK_group_lesson PRIMARY KEY (id);
@@ -134,7 +134,7 @@ CREATE TABLE individual_lesson (
  instructor_id INT NOT NULL,
  student_id INT NOT NULL,
  date DATE NOT NULL,
- time TIME(10) NOT NULL
+ time TIME(6) NOT NULL
 );
 
 ALTER TABLE individual_lesson ADD CONSTRAINT PK_individual_lesson PRIMARY KEY (id);
