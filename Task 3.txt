@@ -1,6 +1,6 @@
 Requirement: Show all lessons per month
 Solution:
-select count(*)individual 
+select count(*)
 from lesson_record 
 where date between '2021-02-01' and '2021-02-28';
 
