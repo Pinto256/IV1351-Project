@@ -20,7 +20,7 @@ CREATE TABLE instrument (
  type VARCHAR(256) NOT NULL,
  brand VARCHAR(256),
  price INT,
- is_being_rented BIT(10) NOT NULL
+ is_being_rented INT NOT NULL
 );
 
 ALTER TABLE instrument ADD CONSTRAINT PK_instrument PRIMARY KEY (id);
