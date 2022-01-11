@@ -30,33 +30,13 @@ order by count(*) ASC
 
 
 Requirement: List all ensembles held during the next week, sorted by music genre and weekday. For each ensemble tell whether it's full booked, has 1-2 seats left or has more seats left. Hint: you might want to use a CASE statement in your query to produce the desired output.
-Solution: 	
---Fully booked 
-select ensemble.id, ensemble.maximum_number_of_students
-from ensemble
-full outer join student_ensemble
-on student_ensemble.ensemble_id=ensemble.id
-where ensemble.date between CURRENT_DATE and (CURRENT_DATE+7) and genre=’desired_genre’
-group by ensemble.id
-having count(student_ensemble.student_id)=ensemble.maximum_number_of_students
+Solution:
 
---Having 1 or 2 seats left
-select ensemble.id, ensemble.maximum_number_of_students
-from ensemble
-full outer join student_ensemble
-on student_ensemble.ensemble_id=ensemble.id
-where ensemble.date between CURRENT_DATE and (CURRENT_DATE+7) and genre=’desired_genre’
-group by ensemble.id
-having count(student_ensemble.student_id)=(ensemble.maximum_number_of_students-1) OR
-count(student_ensemble.student_id)=(ensemble.maximum_number_of_students-2)
-
---Having more than 2 seats left
-select ensemble.id, ensemble.maximum_number_of_students
-from ensemble
-full outer join student_ensemble
-on student_ensemble.ensemble_id=ensemble.id
-where ensemble.date between CURRENT_DATE and (CURRENT_DATE+7) and genre=’desired_genre’
-group by ensemble.id
-having count(student_ensemble.student_id)<(ensemble.maximum_number_of_students-2)
-
+SELECT , CASE 
+WHEN (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) = maximum_number_of_students THEN 'Fully booked'
+WHEN maximum_number_of_students - (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) > 0
+AND maximum_number_of_students - (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) < 3 THEN '1-2 Places left'
+WHEN maximum_number_of_students - (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) > 2 THEN 'More than 2 places left'
+END places
+FROM ensemble WHERE date BETWEEN (SELECT date_trunc('week', CURRENT_DATE + integer '7')) AND (SELECT date_trunc('week', CURRENT_DATE + integer '14')) ORDER BY genre ASC, date ASC;
 
