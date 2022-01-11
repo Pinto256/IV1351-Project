@@ -31,7 +31,7 @@ order by count(*) ASC;
 
 Requirement: List all ensembles held during the next week, sorted by music genre and weekday. For each ensemble tell whether it's full booked, has 1-2 seats left or has more seats left. Hint: you might want to use a CASE statement in your query to produce the desired output.
 Solution:
-SELECT , CASE 
+SELECT *, CASE 
 WHEN (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) = maximum_number_of_students THEN 'Fully booked'
 WHEN maximum_number_of_students - (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) > 0
 AND maximum_number_of_students - (SELECT COUNT(*) FROM student_ensemble WHERE ensemble_id = ensemble.id) < 3 THEN '1-2 Places left'
